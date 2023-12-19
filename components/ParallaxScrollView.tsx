@@ -17,20 +17,7 @@ import Animated, {
 import { Stack, useNavigation } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
-
-interface Recipe {
-  id: string;
-  prep_time: string;
-  name: string;
-  image: string;
-  about: string;
-  tags: string;
-  difficulty: string;
-  cloudinary_id: string;
-  ingredients: string;
-  directions: string;
-  category_id: string;
-}
+import Recipe from "@/types/recipe";
 
 interface Props {
   children?: ReactNode;
