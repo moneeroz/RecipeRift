@@ -11,9 +11,13 @@ import {
 import React, { useEffect, useState } from "react";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import Colors from "@/constants/Colors";
-import { useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import { getIngrediantImage } from "@/assets/ingrediants/ingrediants";
 import { useGetRecipeQuery } from "@/store/api";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
 
 interface Recipe {
   id: string;
@@ -31,7 +35,7 @@ interface Recipe {
 
 interface Ingredient {
   name: string;
-  img: ImageSourcePropType; // replace 'any' with the actual type of your image
+  img: ImageSourcePropType;
 }
 
 const initialRecipe = {
@@ -50,6 +54,13 @@ const initialRecipe = {
 
 const Details = () => {
   const { id } = useLocalSearchParams();
+
+  const itemsCount = useSelector((state: RootState) =>
+    Object.values(state.basket.items).reduce(
+      (total, item) => total + item.quantity,
+      0,
+    ),
+  );
 
   const { data, error, isLoading } = useGetRecipeQuery(id.toString());
 
@@ -87,57 +98,72 @@ const Details = () => {
   );
 
   return (
-    <View>
-      <ParallaxScrollView recipe={recipe}>
-        <View style={styles.detailsContainer}>
-          <Text style={styles.recipeName}>{recipe.name}</Text>
-          <Text style={styles.recipeDescription}>
-            {recipe.prep_time} ·{" "}
-            {tags.map(
-              (tag, index) => `${tag}${index < tags.length - 1 ? " · " : ""}`,
-            )}
-          </Text>
-          <Text style={styles.recipeDescription}>{recipe.about}</Text>
-          <FlatList
-            keyExtractor={(item, index) => index.toString()}
-            scrollEnabled={false}
-            data={ingrediants}
-            renderItem={renderIngrediant}
-            ItemSeparatorComponent={() => (
-              <View
-                style={{
-                  marginHorizontal: 16,
-                  height: 1,
-                  backgroundColor: Colors.grey,
-                }}
-              />
-            )}
-            ListHeaderComponent={() => (
-              <Text style={styles.listHeader}>Ingrediants</Text>
-            )}
-          />
-          <FlatList
-            contentContainerStyle={{ paddingBottom: 50 }}
-            keyExtractor={(item, index) => index.toString()}
-            scrollEnabled={false}
-            data={directions}
-            renderItem={renderInstruction}
-            ItemSeparatorComponent={() => (
-              <View
-                style={{
-                  marginHorizontal: 16,
-                  height: 1,
-                  backgroundColor: Colors.grey,
-                }}
-              />
-            )}
-            ListHeaderComponent={() => (
-              <Text style={styles.listHeader}>Instructions</Text>
-            )}
-          />
+    <>
+      <View>
+        <ParallaxScrollView recipe={recipe}>
+          <View style={styles.detailsContainer}>
+            <Text style={styles.recipeName}>{recipe.name}</Text>
+            <Text style={styles.recipeDescription}>
+              {recipe.prep_time} ·{" "}
+              {tags.map(
+                (tag, index) => `${tag}${index < tags.length - 1 ? " · " : ""}`,
+              )}
+            </Text>
+            <Text style={styles.recipeDescription}>{recipe.about}</Text>
+            <FlatList
+              keyExtractor={(item, index) => index.toString()}
+              scrollEnabled={false}
+              data={ingrediants}
+              renderItem={renderIngrediant}
+              ItemSeparatorComponent={() => (
+                <View
+                  style={{
+                    marginHorizontal: 16,
+                    height: 1,
+                    backgroundColor: Colors.grey,
+                  }}
+                />
+              )}
+              ListHeaderComponent={() => (
+                <Text style={styles.listHeader}>Ingrediants</Text>
+              )}
+            />
+            <FlatList
+              contentContainerStyle={{ paddingBottom: 50 }}
+              keyExtractor={(item, index) => index.toString()}
+              scrollEnabled={false}
+              data={directions}
+              renderItem={renderInstruction}
+              ItemSeparatorComponent={() => (
+                <View
+                  style={{
+                    marginHorizontal: 16,
+                    height: 1,
+                    backgroundColor: Colors.grey,
+                  }}
+                />
+              )}
+              ListHeaderComponent={() => (
+                <Text style={styles.listHeader}>Instructions</Text>
+              )}
+            />
+          </View>
+        </ParallaxScrollView>
+      </View>
+      {itemsCount > 0 && (
+        <View style={styles.footer}>
+          <SafeAreaView edges={["bottom"]} style={{ backgroundColor: "#fff" }}>
+            <Link href="/basket" asChild>
+              <TouchableOpacity style={styles.fullButton}>
+                <Text style={styles.basket}>{itemsCount}</Text>
+                <Text style={styles.footerText}>View Basket</Text>
+                <Ionicons name="arrow-forward" size={28} color={"#fff"} />
+              </TouchableOpacity>
+            </Link>
+          </SafeAreaView>
         </View>
-      </ParallaxScrollView>
-    </View>
+      )}
+    </>
   );
 };
 
@@ -181,6 +207,42 @@ const styles = StyleSheet.create({
     color: Colors.mediumDark,
     paddingVertical: 4,
     lineHeight: 20,
+  },
+  footer: {
+    position: "absolute",
+    backgroundColor: "#fff",
+    bottom: 0,
+    left: 0,
+    width: "100%",
+    padding: 10,
+    elevation: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -10 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    paddingTop: 20,
+  },
+  fullButton: {
+    backgroundColor: Colors.primary,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    alignItems: "center",
+    flexDirection: "row",
+    flex: 1,
+    justifyContent: "space-between",
+    height: 50,
+  },
+  footerText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  basket: {
+    color: "#fff",
+    backgroundColor: "#19AA86",
+    fontWeight: "bold",
+    padding: 8,
+    borderRadius: 2,
   },
 });
 
