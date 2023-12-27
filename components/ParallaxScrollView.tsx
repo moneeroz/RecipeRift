@@ -2,9 +2,7 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
   Dimensions,
-  ScrollView,
   TouchableOpacity,
 } from "react-native";
 import React, { ReactNode } from "react";
@@ -15,9 +13,11 @@ import Animated, {
   useScrollViewOffset,
 } from "react-native-reanimated";
 import { Stack, useNavigation } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import Recipe from "@/types/recipe";
+import { addRecipeToBasket } from "@/store/basket";
+import { useDispatch } from "react-redux";
 
 interface Props {
   children?: ReactNode;
@@ -31,6 +31,8 @@ const ParallaxScrollView = ({ recipe, children }: Props) => {
   const navigation = useNavigation();
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
+
+  const dispatch = useDispatch();
 
   const imageAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -79,6 +81,19 @@ const ParallaxScrollView = ({ recipe, children }: Props) => {
               }}
             >
               <Ionicons name="close-outline" size={28} color={Colors.primary} />
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(addRecipeToBasket(recipe));
+              }}
+            >
+              <MaterialCommunityIcons
+                name="cart-plus"
+                size={28}
+                color={Colors.primary}
+              />
             </TouchableOpacity>
           ),
         }}
