@@ -94,18 +94,20 @@ const Basket = () => {
 
       <View style={styles.footer}>
         <SafeAreaView edges={["bottom"]} style={{ backgroundColor: "#fff" }}>
-          <TouchableOpacity
+          <Link
+            href="/shoppingList"
+            asChild
             style={[
               styles.fullButton,
               {
                 opacity: Object.values(basketItems).length > 0 ? 1 : 0.5,
               },
             ]}
-            onPress={() => {}}
-            disabled={itemsCount > 0 ? false : true}
           >
-            <Text style={styles.footerText}>Generate a shopping list</Text>
-          </TouchableOpacity>
+            <TouchableOpacity disabled={itemsCount > 0 ? false : true}>
+              <Text style={styles.footerText}>Generate a shopping list</Text>
+            </TouchableOpacity>
+          </Link>
         </SafeAreaView>
       </View>
     </>
