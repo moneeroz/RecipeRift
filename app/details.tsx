@@ -18,39 +18,15 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-
-interface Recipe {
-  id: string;
-  prep_time: string;
-  name: string;
-  about: string;
-  tags: string;
-  difficulty: string;
-  image: string;
-  cloudinary_id: string;
-  ingredients: string;
-  directions: string;
-  category_id: string;
-}
+import Recipe from "@/types/recipe";
 
 interface Ingredient {
   name: string;
   img: ImageSourcePropType;
+  extra?: string;
+  quantity: string;
+  unit: string;
 }
-
-const initialRecipe = {
-  id: "",
-  prep_time: "",
-  name: "",
-  about: "",
-  tags: "",
-  difficulty: "",
-  image: "/",
-  cloudinary_id: "",
-  ingredients: "",
-  directions: "",
-  category_id: "",
-};
 
 const Details = () => {
   const { id } = useLocalSearchParams();
@@ -67,12 +43,15 @@ const Details = () => {
   if (!data) return;
   const recipe: Recipe = data;
 
-  const ingrediants: Ingredient[] = recipe.ingredients
-    .split("\n")
-    .map((item) => {
-      item.trim();
-      return { name: item, img: getIngrediantImage(item) };
-    });
+  const ingrediants: Ingredient[] = recipe.ingredients.map((item) => {
+    return {
+      name: item.name,
+      extra: item.extra,
+      quantity: item.recipeIngredient.quantity,
+      unit: item.recipeIngredient.unit,
+      img: getIngrediantImage(item.name),
+    };
+  });
 
   const directions: Array<string> = recipe.directions.split("\n");
 
@@ -81,7 +60,9 @@ const Details = () => {
   const renderIngrediant: ListRenderItem<Ingredient> = ({ item, index }) => (
     <TouchableOpacity style={styles.item}>
       <View style={{ flex: 1, justifyContent: "center" }}>
-        <Text style={styles.dish}>{item.name}</Text>
+        <Text style={styles.dish}>
+          {item.quantity} {item.unit} {item.name} {item.extra && item.extra}
+        </Text>
       </View>
       <Image source={item.img} style={styles.dishImage} />
     </TouchableOpacity>

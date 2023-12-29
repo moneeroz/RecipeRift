@@ -57,6 +57,21 @@ export default function RootLayoutNav() {
             ),
           }}
         />
+        <Stack.Screen
+          name="shoppingList"
+          options={{
+            headerTitle: "Shopping List",
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              >
+                <Ionicons name="arrow-back" size={28} color={Colors.primary} />
+              </TouchableOpacity>
+            ),
+          }}
+        />
       </Stack>
     </Provider>
   );
