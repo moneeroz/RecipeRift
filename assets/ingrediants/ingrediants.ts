@@ -16,13 +16,17 @@ export const ingrediants = [
     img: require("@/assets/ingrediants/beefbroth.png"),
   },
   {
+    name: "beyond meat",
+    img: require("@/assets/ingrediants/beyondmeat.png"),
+  },
+  {
     name: "cajun spice blend",
     img: require("@/assets/ingrediants/cajunspiceblend.png"),
   },
   { name: "canned corn", img: require("@/assets/ingrediants/cannedcorn.png") },
   { name: "carrot", img: require("@/assets/ingrediants/carrot.png") },
   {
-    name: "cheddar cheese, shredded",
+    name: "cheddar cheese",
     img: require("@/assets/ingrediants/cheddarcheese.png"),
   },
   {
@@ -39,7 +43,11 @@ export const ingrediants = [
   },
   { name: "cornstarch", img: require("@/assets/ingrediants/cornstarch.png") },
   {
-    name: "feta cheese, crumbled",
+    name: "crushed tomatoes with garlic and onion",
+    img: require("@/assets/ingrediants/crushedtomatoeswithgarlicandonion.png"),
+  },
+  {
+    name: "feta cheese",
     img: require("@/assets/ingrediants/fetacheese.png"),
   },
   {
@@ -68,6 +76,10 @@ export const ingrediants = [
   },
   { name: "hot pepper", img: require("@/assets/ingrediants/hotpepper.png") },
   { name: "hot sauce", img: require("@/assets/ingrediants/hotsauce.png") },
+  {
+    name: "kidney beans",
+    img: require("@/assets/ingrediants/kidneybeans.png"),
+  },
   { name: "lemon", img: require("@/assets/ingrediants/lemon.png") },
   { name: "lime", img: require("@/assets/ingrediants/lime.png") },
   {
@@ -75,14 +87,14 @@ export const ingrediants = [
     img: require("@/assets/ingrediants/mexicanseasoning.png"),
   },
   {
-    name: "monterey jack cheese, shredded",
+    name: "monterey jack cheese",
     img: require("@/assets/ingrediants/montereyjackcheese.png"),
   },
   { name: "oil", img: require("@/assets/ingrediants/oil.png") },
   { name: "parsley", img: require("@/assets/ingrediants/parsley.png") },
   { name: "pepper", img: require("@/assets/ingrediants/pepper.png") },
   {
-    name: "pork chops, boneless",
+    name: "pork chops",
     img: require("@/assets/ingrediants/pork.png"),
   },
   {
@@ -91,7 +103,7 @@ export const ingrediants = [
   },
   { name: "red onion", img: require("@/assets/ingrediants/redonion.png") },
   {
-    name: "salmon fillets, skinless",
+    name: "salmon fillets",
     img: require("@/assets/ingrediants/salmon.png"),
   },
   { name: "salt", img: require("@/assets/ingrediants/salt.png") },
@@ -108,6 +120,10 @@ export const ingrediants = [
     img: require("@/assets/ingrediants/sugarsnappeas.png"),
   },
   { name: "tomato", img: require("@/assets/ingrediants/tomato.png") },
+  {
+    name: "tex-mex paste",
+    img: require("@/assets/ingrediants/tex-mexpaste.png"),
+  },
   {
     name: "unsalted butter",
     img: require("@/assets/ingrediants/unsaltedbutter.png"),
