@@ -90,7 +90,7 @@ const ParallaxScrollView = ({ recipe, children }: Props) => {
               }}
             >
               <MaterialCommunityIcons
-                name="cart-plus"
+                name="basket-plus-outline"
                 size={28}
                 color={Colors.primary}
               />

@@ -14,9 +14,22 @@ import { Link, Stack } from "expo-router";
 import SwipeableRow from "@/components/SwipeableRow";
 import { RootState } from "@/store/store";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  addIngredientToShoppingList,
+  clearShoppingList,
+  removeIngredientFromShoppingList,
+} from "@/store/shoppingList";
+import { getIngrediantImage } from "@/assets/ingrediants/ingrediants";
+import Recipe from "@/types/recipe";
+
+interface Item {
+  data: Recipe;
+  quantity: number;
+}
 
 const Basket = () => {
   const basketItems = useSelector((state: RootState) => state.basket.items);
+  const recipes = Object.values(basketItems).map((item) => item);
   const dispatch = useDispatch();
 
   const itemsCount = useSelector((state: RootState) =>
@@ -25,6 +38,39 @@ const Basket = () => {
       0,
     ),
   );
+
+  const onDelete = (recipe: Item) => {
+    dispatch(removeRecipeFromBasket(recipe.data));
+    recipe.data.ingredients.forEach((i) => {
+      const ingredient = {
+        id: i.id,
+        name: i.name,
+        quantity: Number(i.recipeIngredient.quantity),
+        unit: i.recipeIngredient.unit,
+        img: getIngrediantImage(i.name),
+      };
+      dispatch(removeIngredientFromShoppingList(ingredient));
+    });
+  };
+
+  const onAdd = () => {
+    dispatch(clearShoppingList());
+
+    recipes.forEach((recipe) => {
+      recipe.data.ingredients.forEach((ingredient) => {
+        dispatch(
+          addIngredientToShoppingList({
+            id: ingredient.id,
+            name: ingredient.name,
+            quantity:
+              Number(ingredient.recipeIngredient.quantity) * recipe.quantity,
+            unit: ingredient.recipeIngredient.unit,
+            img: getIngrediantImage(ingredient.name),
+          }),
+        );
+      });
+    });
+  };
 
   return (
     <>
@@ -37,7 +83,7 @@ const Basket = () => {
               }}
             >
               <MaterialCommunityIcons
-                name="cart-off"
+                name="basket-remove-outline"
                 size={28}
                 color={Colors.primary}
               />
@@ -57,9 +103,7 @@ const Basket = () => {
           <View style={{ height: 1, backgroundColor: Colors.grey }} />
         )}
         renderItem={({ item }) => (
-          <SwipeableRow
-            onDelete={() => dispatch(removeRecipeFromBasket(item.data))}
-          >
+          <SwipeableRow onDelete={() => onDelete(item)}>
             <View style={styles.row}>
               <Text style={{ color: Colors.primary, fontSize: 18 }}>
                 {item.quantity}x
@@ -104,7 +148,12 @@ const Basket = () => {
               },
             ]}
           >
-            <TouchableOpacity disabled={itemsCount > 0 ? false : true}>
+            <TouchableOpacity
+              disabled={itemsCount > 0 ? false : true}
+              onPress={() => {
+                onAdd();
+              }}
+            >
               <Text style={styles.footerText}>Generate a shopping list</Text>
             </TouchableOpacity>
           </Link>

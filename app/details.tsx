@@ -8,7 +8,7 @@ import {
   FlatList,
   ImageSourcePropType,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import Colors from "@/constants/Colors";
 import { Link, useLocalSearchParams } from "expo-router";
@@ -17,7 +17,7 @@ import { useGetRecipeQuery } from "@/store/api";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Recipe from "@/types/recipe";
 
 interface Ingredient {
@@ -138,7 +138,11 @@ const Details = () => {
               <TouchableOpacity style={styles.fullButton}>
                 <Text style={styles.basket}>{itemsCount}</Text>
                 <Text style={styles.footerText}>View Basket</Text>
-                <Ionicons name="arrow-forward" size={28} color={"#fff"} />
+                <MaterialCommunityIcons
+                  name="basket-outline"
+                  size={28}
+                  color={"#fff"}
+                />
               </TouchableOpacity>
             </Link>
           </SafeAreaView>

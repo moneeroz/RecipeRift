@@ -1,3 +1,5 @@
+import Ingredient from "./ingredient";
+
 export default interface Recipe {
   id: string;
   prep_time: string;
@@ -7,7 +9,7 @@ export default interface Recipe {
   difficulty: string;
   image: string;
   cloudinary_id: string;
-  ingredients: string;
+  ingredients: Ingredient[];
   directions: string;
   category_id: string;
 }
