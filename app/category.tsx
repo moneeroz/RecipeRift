@@ -3,22 +3,9 @@ import React from "react";
 import { Stack, useLocalSearchParams, useNavigation } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
-import CategoryList from "@/components/CategoryList";
+import RecipeList from "@/components/RecipeList";
 import { useGetRecipesByCategoryQuery } from "@/store/api";
-
-interface Recipe {
-  id: string;
-  prep_time: string;
-  name: string;
-  about: string;
-  tags: string;
-  difficulty: string;
-  image: string;
-  cloudinary_id: string;
-  ingredients: string;
-  directions: string;
-  category_id: string;
-}
+import Recipe from "@/types/recipe";
 
 const Category = () => {
   const { id } = useLocalSearchParams();
@@ -52,7 +39,7 @@ const Category = () => {
           ),
         }}
       />
-      <CategoryList recipes={recipes} />
+      <RecipeList recipes={recipes} height={100} />
     </View>
   );
 };

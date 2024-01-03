@@ -5,7 +5,11 @@ import { Link } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const SearchBar = () => {
+interface Props {
+  onSearchTermChange: (newSearchTerm: string) => void;
+}
+
+const SearchBar = ({ onSearchTermChange }: Props) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.searchContainer}>
@@ -17,7 +21,11 @@ const SearchBar = () => {
               size={20}
               color={Colors.medium}
             />
-            <TextInput style={styles.input} placeholder="Search Recipes" />
+            <TextInput
+              style={styles.input}
+              placeholder="Search Recipes"
+              onChangeText={onSearchTermChange}
+            />
           </View>
           <Link href={"/(modal)/filter"} asChild>
             <TouchableOpacity style={styles.optionButton}>

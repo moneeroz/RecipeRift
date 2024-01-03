@@ -3,9 +3,13 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Link } from "expo-router";
 import Colors from "@/constants/Colors";
 import { useGetRecipesQuery } from "@/store/api";
+import Recipe from "@/types/recipe";
 
-const Recipes = () => {
-  const { data, error, isLoading } = useGetRecipesQuery();
+interface Props {
+  data?: Recipe[];
+}
+
+const Recipes = ({ data }: Props) => {
   return (
     <ScrollView
       horizontal

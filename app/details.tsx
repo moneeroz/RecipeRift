@@ -61,7 +61,8 @@ const Details = () => {
     <TouchableOpacity style={styles.item}>
       <View style={{ flex: 1, justifyContent: "center" }}>
         <Text style={styles.dish}>
-          {item.quantity} {item.unit} {item.name} {item.extra && item.extra}
+          {item.quantity} {item.unit} {item.name}
+          {item.extra && `, ${item.extra}`}
         </Text>
       </View>
       <Image source={item.img} style={styles.dishImage} />
