@@ -11,7 +11,7 @@ interface Props {
 
 const SearchBar = ({ onSearchTermChange }: Props) => {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <View style={styles.searchContainer}>
         <View style={styles.searchSection}>
           <View style={styles.searchField}>
@@ -24,6 +24,7 @@ const SearchBar = ({ onSearchTermChange }: Props) => {
             <TextInput
               style={styles.input}
               placeholder="Search Recipes"
+              placeholderTextColor={Colors.medium}
               onChangeText={onSearchTermChange}
             />
           </View>
@@ -38,7 +39,7 @@ const SearchBar = ({ onSearchTermChange }: Props) => {
           </Link>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
