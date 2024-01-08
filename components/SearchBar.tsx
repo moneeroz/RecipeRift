@@ -3,7 +3,6 @@ import React from "react";
 import Colors from "@/constants/Colors";
 import { Link } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 interface Props {
   onSearchTermChange: (newSearchTerm: string) => void;
