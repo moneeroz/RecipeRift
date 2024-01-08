@@ -8,36 +8,15 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import Colors from "@/constants/Colors";
-import { useLogInMutation } from "@/store/api";
-import { useDispatch } from "react-redux";
-import { setCredentials } from "@/store/auth";
-import { Link, Redirect, useNavigation } from "expo-router";
+
+import { Link } from "expo-router";
+import { useSession } from "@/context/ctx";
 
 const Login = () => {
-  const [logIn, { data, error, isLoading }] = useLogInMutation();
-  const dispatch = useDispatch();
+  const { signIn } = useSession();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const onLogin = async () => {
-    try {
-      const result = await logIn({ email, password });
-
-      if ("data" in result) {
-        dispatch(
-          setCredentials({
-            user: result.data.user,
-            token: result.data.token,
-          }),
-        );
-      } else {
-        console.error(result.error);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -57,7 +36,11 @@ const Login = () => {
         placeholderTextColor={Colors.medium}
         style={styles.inputField}
       />
-      <Button onPress={onLogin} title="Login" color={Colors.primary}></Button>
+      <Button
+        onPress={() => signIn(email, password)}
+        title="Login"
+        color={Colors.primary}
+      ></Button>
 
       <Link href="/register" asChild>
         <Pressable style={styles.button}>
