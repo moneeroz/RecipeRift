@@ -10,8 +10,8 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://10.0.0.202:2828/api/",
     prepareHeaders: (headers, { getState }) => {
-      // By default, if we have a token in the store, let's use that for authenticated requests
       const token = (getState() as RootState).auth.token;
+
       if (token) {
         headers.set("authorization", token);
       }
