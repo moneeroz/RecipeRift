@@ -1,27 +1,25 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useRef } from "react";
 import Colors from "@/constants/Colors";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useSession } from "@/context/ctx";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import BottomSheet from "./BottomSheet";
 
 const Header = () => {
-  const { signOut } = useSession();
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
+  const openModal = () => {
+    bottomSheetRef.current?.present();
+  };
   return (
     <SafeAreaView style={styles.safeArea}>
+      <BottomSheet ref={bottomSheetRef} />
       <View style={styles.container}>
-        <TouchableOpacity>
-          <Ionicons name="menu" size={24} color={Colors.primary} />
-        </TouchableOpacity>
-
         <Text style={styles.title}>Home</Text>
 
-        <TouchableOpacity
-          style={styles.profileButton}
-          onPress={() => signOut()}
-        >
+        <TouchableOpacity style={styles.profileButton} onPress={openModal}>
           <Ionicons name="person-outline" size={20} color={Colors.primary} />
         </TouchableOpacity>
       </View>
@@ -56,6 +54,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: "bold",
+    flex: 1,
+    textAlign: "center",
+    paddingLeft: 50,
   },
 });
 
