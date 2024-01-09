@@ -2,16 +2,19 @@ import { View, TextInput, StyleSheet, Button, Image, Text } from "react-native";
 import React, { useState } from "react";
 import Colors from "@/constants/Colors";
 import { useRegisterMutation } from "@/store/api";
+import { useRouter } from "expo-router";
 
 const Register = () => {
   const [register, { data, error, isLoading }] = useRegisterMutation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const router = useRouter();
 
   const onRegister = async () => {
     try {
       await register({ username, email, password });
+      router.push("/login");
     } catch (error) {
       console.log(error);
     }
