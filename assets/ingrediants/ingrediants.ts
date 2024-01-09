@@ -1,12 +1,20 @@
 export const getIngrediantImage = (name: string) => {
-  const ingrediant = ingrediants.find((i) =>
-    name.toLocaleLowerCase().endsWith(i.name),
+  const ingrediant = ingrediants.find(
+    (i) => name.toLocaleLowerCase() == i.name,
   );
   return ingrediant ? ingrediant.img : null;
 };
 
 export const ingrediants = [
+  {
+    name: "arborio rice",
+    img: require("@/assets/ingrediants/arboriorice.png"),
+  },
   { name: "all-purpose flour", img: require("@/assets/ingrediants/flour.png") },
+  {
+    name: "baby spinach",
+    img: require("@/assets/ingrediants/babyspinach.png"),
+  },
   {
     name: "basmati rice",
     img: require("@/assets/ingrediants/basmatirice.png"),
@@ -38,10 +46,22 @@ export const ingrediants = [
     img: require("@/assets/ingrediants/chickentenders.png"),
   },
   {
+    name: "cilantro",
+    img: require("@/assets/ingrediants/cilantro.png"),
+  },
+  {
+    name: "coconut milk",
+    img: require("@/assets/ingrediants/coconutmilk.png"),
+  },
+  {
     name: "corn kernals",
     img: require("@/assets/ingrediants/cornkernals.png"),
   },
   { name: "cornstarch", img: require("@/assets/ingrediants/cornstarch.png") },
+  {
+    name: "crispy shallots",
+    img: require("@/assets/ingrediants/crispyshallots.png"),
+  },
   {
     name: "crushed tomatoes with garlic and onion",
     img: require("@/assets/ingrediants/crushedtomatoeswithgarlicandonion.png"),
@@ -53,6 +73,10 @@ export const ingrediants = [
   {
     name: "flour tortillas",
     img: require("@/assets/ingrediants/flourtortillas.png"),
+  },
+  {
+    name: "garlic puree",
+    img: require("@/assets/ingrediants/garlicpuree.png"),
   },
   { name: "garlic salt", img: require("@/assets/ingrediants/garlicsalt.png") },
   { name: "garlic", img: require("@/assets/ingrediants/garlic.png") },
@@ -98,6 +122,10 @@ export const ingrediants = [
     img: require("@/assets/ingrediants/pork.png"),
   },
   {
+    name: "red curry paste",
+    img: require("@/assets/ingrediants/redcurrypaste.png"),
+  },
+  {
     name: "red potato",
     img: require("@/assets/ingrediants/redpotatoes.png"),
   },
@@ -111,10 +139,18 @@ export const ingrediants = [
     name: "salt and pepper",
     img: require("@/assets/ingrediants/saltandpepper.png"),
   },
+  {
+    name: "sea bass",
+    img: require("@/assets/ingrediants/seabass.png"),
+  },
   { name: "shrimp", img: require("@/assets/ingrediants/shrimp.png") },
   { name: "sour cream", img: require("@/assets/ingrediants/sourcream.png") },
   { name: "soy sauce", img: require("@/assets/ingrediants/soysauce.png") },
   { name: "sugar", img: require("@/assets/ingrediants/sugar.png") },
+  {
+    name: "sweet bell pepper",
+    img: require("@/assets/ingrediants/sweetbellpepper.png"),
+  },
   {
     name: "sugar snap peas",
     img: require("@/assets/ingrediants/sugarsnappeas.png"),
@@ -123,6 +159,10 @@ export const ingrediants = [
   {
     name: "tex-mex paste",
     img: require("@/assets/ingrediants/tex-mexpaste.png"),
+  },
+  {
+    name: "thai seasoning",
+    img: require("@/assets/ingrediants/thaiseasoning.png"),
   },
   {
     name: "unsalted butter",
