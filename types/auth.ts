@@ -9,3 +9,13 @@ export interface LoginResponse {
   user: User;
   token: string;
 }
+
+export interface FavouritePayload {
+  recipe_id: string;
+  user_id: string | undefined;
+}
+export interface passwordResetPayload {
+  id: string | undefined;
+  oldPassword: string;
+  newPassword: string;
+}
