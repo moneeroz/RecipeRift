@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Beef",
+    "count": 7
+  },
+  {
+    "name": "Chicken",
+    "count": 9
+  },
+  {
+    "name": "Halal",
+    "count": 30
+  },
+  {
+    "name": "Pork",
+    "count": 21
+  },
+  {
+    "name": "Seafood",
+    "count": 73
+  },
+  {
+    "name": "Vegetarian",
+    "count": 18
+  }
+]
