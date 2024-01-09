@@ -11,6 +11,7 @@ import {
 } from "@/store/auth";
 import { router } from "expo-router";
 import { store } from "@/store/store";
+import { clearFavs } from "@/store/favourites";
 
 const AuthContext = React.createContext<{
   signIn: (email: string, password: string) => void;
@@ -94,6 +95,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
         },
         signOut: () => {
           dispatch(clearCredentials());
+          dispatch(clearFavs());
           setSession(null);
           setToken(null);
         },
