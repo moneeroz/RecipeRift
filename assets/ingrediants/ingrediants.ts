@@ -94,6 +94,7 @@ export const ingrediants = [
     img: require("@/assets/ingrediants/greenbellpepper.png"),
   },
   { name: "ground beef", img: require("@/assets/ingrediants/groundbeef.png") },
+  { name: "ground pork", img: require("@/assets/ingrediants/groundpork.png") },
   {
     name: "honey-garlic sauce",
     img: require("@/assets/ingrediants/honeygarlicsauce.png"),
@@ -111,6 +112,10 @@ export const ingrediants = [
     img: require("@/assets/ingrediants/mexicanseasoning.png"),
   },
   {
+    name: "miso broth concentrate",
+    img: require("@/assets/ingrediants/misobrothconcentrate.png"),
+  },
+  {
     name: "monterey jack cheese",
     img: require("@/assets/ingrediants/montereyjackcheese.png"),
   },
@@ -122,6 +127,14 @@ export const ingrediants = [
     img: require("@/assets/ingrediants/pork.png"),
   },
   {
+    name: "radish",
+    img: require("@/assets/ingrediants/radish.png"),
+  },
+  {
+    name: "red cabbage",
+    img: require("@/assets/ingrediants/redcabbage.png"),
+  },
+  {
     name: "red curry paste",
     img: require("@/assets/ingrediants/redcurrypaste.png"),
   },
@@ -130,6 +143,10 @@ export const ingrediants = [
     img: require("@/assets/ingrediants/redpotatoes.png"),
   },
   { name: "red onion", img: require("@/assets/ingrediants/redonion.png") },
+  {
+    name: "rice vinegar",
+    img: require("@/assets/ingrediants/ricevinegar.png"),
+  },
   {
     name: "salmon fillets",
     img: require("@/assets/ingrediants/salmon.png"),
@@ -142,6 +159,14 @@ export const ingrediants = [
   {
     name: "sea bass",
     img: require("@/assets/ingrediants/seabass.png"),
+  },
+  {
+    name: "sesame oil",
+    img: require("@/assets/ingrediants/sesameoil.png"),
+  },
+  {
+    name: "spicy mayo",
+    img: require("@/assets/ingrediants/spicymayo.png"),
   },
   { name: "shrimp", img: require("@/assets/ingrediants/shrimp.png") },
   { name: "sour cream", img: require("@/assets/ingrediants/sourcream.png") },
