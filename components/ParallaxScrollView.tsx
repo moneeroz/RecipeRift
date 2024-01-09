@@ -12,12 +12,24 @@ import Animated, {
   useAnimatedStyle,
   useScrollViewOffset,
 } from "react-native-reanimated";
-import { Stack, useNavigation } from "expo-router";
+import { Stack, useNavigation, useRouter } from "expo-router";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
 import Recipe from "@/types/recipe";
 import { addRecipeToBasket } from "@/store/basket";
 import { useDispatch } from "react-redux";
+import {
+  useAddToFavouritesMutation,
+  useGetFavouritesQuery,
+  useRemoveFromFavouritesMutation,
+} from "@/store/api";
+import { selectCurrentUser } from "@/store/auth";
+import { store } from "@/store/store";
+import {
+  addToFavs,
+  removeFromFavs,
+  selectFavourites,
+} from "@/store/favourites";
 
 interface Props {
   children?: ReactNode;
@@ -29,10 +41,56 @@ const height = 300;
 
 const ParallaxScrollView = ({ recipe, children }: Props) => {
   const navigation = useNavigation();
+  const router = useRouter();
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
 
+  const [addToFavourites] = useAddToFavouritesMutation();
+  const [removeFromFavourites] = useRemoveFromFavouritesMutation();
   const dispatch = useDispatch();
+  const user = selectCurrentUser(store.getState());
+  const favourites = selectFavourites(store.getState());
+  const isFavourite = favourites?.some((fav) => fav.id === recipe.id);
+  console.log(isFavourite);
+
+  const handleFavPress = () => {
+    if (!user) {
+      router.replace("/login");
+      return;
+    }
+    if (isFavourite) {
+      removeFromFavourites({ recipe_id: recipe.id, user_id: user.id });
+      dispatch(removeFromFavs({ recipe: recipe }));
+    } else {
+      addToFavourites({ recipe_id: recipe.id, user_id: user.id });
+      dispatch(addToFavs({ recipe: recipe }));
+    }
+  };
+
+  const renderButtons = () => (
+    <>
+      {user && (
+        <TouchableOpacity onPress={handleFavPress} style={{ marginRight: 10 }}>
+          <Ionicons
+            name={isFavourite ? "heart-dislike-outline" : "heart-outline"}
+            size={28}
+            color={Colors.primary}
+          />
+        </TouchableOpacity>
+      )}
+      <TouchableOpacity
+        onPress={() => {
+          dispatch(addRecipeToBasket(recipe));
+        }}
+      >
+        <MaterialCommunityIcons
+          name="basket-plus-outline"
+          size={28}
+          color={Colors.primary}
+        />
+      </TouchableOpacity>
+    </>
+  );
 
   const imageAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -83,19 +141,7 @@ const ParallaxScrollView = ({ recipe, children }: Props) => {
               <Ionicons name="close-outline" size={28} color={Colors.primary} />
             </TouchableOpacity>
           ),
-          headerRight: () => (
-            <TouchableOpacity
-              onPress={() => {
-                dispatch(addRecipeToBasket(recipe));
-              }}
-            >
-              <MaterialCommunityIcons
-                name="basket-plus-outline"
-                size={28}
-                color={Colors.primary}
-              />
-            </TouchableOpacity>
-          ),
+          headerRight: renderButtons,
         }}
       />
       <Animated.ScrollView ref={scrollRef} scrollEventThrottle={16}>

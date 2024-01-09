@@ -1,5 +1,5 @@
-import { Text, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import { Text, StyleSheet, View } from "react-native";
+import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import Categories from "@/components/Categories";
 import Colors from "@/constants/Colors";
@@ -7,8 +7,12 @@ import Recipes from "@/components/Recipes";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 import SearchBar from "@/components/SearchBar";
-import { useGetRecipesQuery } from "@/store/api";
+import { useGetFavouritesQuery, useGetRecipesQuery } from "@/store/api";
 import RecipeList from "@/components/RecipeList";
+import Header from "@/components/Header";
+import { store } from "@/store/store";
+import { useDispatch } from "react-redux";
+import { addToFavs } from "@/store/favourites";
 
 const Page = () => {
   const { data, error, isLoading } = useGetRecipesQuery();
@@ -16,6 +20,29 @@ const Page = () => {
   const filteredRecipes = data?.filter((recipe) =>
     recipe.name.includes(searchTerm),
   );
+
+  const topPicks = data
+    ?.map((recipe) => ({ recipe, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ recipe }) => recipe)
+    .slice(0, 4);
+
+  const trending = data
+    ?.map((recipe) => ({ recipe, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ recipe }) => recipe)
+    .slice(0, 4);
+
+  const user = store.getState().auth.user;
+  const { data: favourites } = useGetFavouritesQuery(user?.id);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user) {
+      if (favourites)
+        favourites.forEach((recipe) => dispatch(addToFavs({ recipe })));
+    }
+  }, [favourites]);
 
   const handleSearchTermChange = (newSearchTerm: string) => {
     setSearchTerm(newSearchTerm);
@@ -25,7 +52,10 @@ const Page = () => {
       <Stack.Screen
         options={{
           header: () => (
-            <SearchBar onSearchTermChange={handleSearchTermChange} />
+            <View style={{ gap: 14 }}>
+              <Header />
+              <SearchBar onSearchTermChange={handleSearchTermChange} />
+            </View>
           ),
         }}
       />
@@ -35,10 +65,10 @@ const Page = () => {
           {searchTerm ? (
             <RecipeList height={50} recipes={filteredRecipes} />
           ) : null}
-          <Text style={styles.header}>Trending today</Text>
-          <Recipes data={data} />
-          <Text style={styles.header}>Top picks for you</Text>
-          <Recipes data={data} />
+          <Text style={styles.containerTitle}>Trending today</Text>
+          <Recipes data={trending} />
+          <Text style={styles.containerTitle}>Top picks for you</Text>
+          <Recipes data={topPicks} />
         </ScrollView>
       </SafeAreaView>
     </>
@@ -47,10 +77,9 @@ const Page = () => {
 
 const styles = StyleSheet.create({
   container: {
-    top: -20,
     backgroundColor: Colors.lightGrey,
   },
-  header: {
+  containerTitle: {
     fontSize: 18,
     fontWeight: "bold",
     marginTop: 16,

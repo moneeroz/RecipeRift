@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Link } from "expo-router";
 import Colors from "@/constants/Colors";
-import { useGetRecipesQuery } from "@/store/api";
 import Recipe from "@/types/recipe";
 
 interface Props {

@@ -63,11 +63,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
           }),
         );
         setSession("xxx");
-        console.log(decoded);
       }
-
-      console.log(token);
-      console.log(user);
     };
     loadToken();
   }, []);

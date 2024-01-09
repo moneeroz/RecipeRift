@@ -38,7 +38,7 @@ const Details = () => {
     ),
   );
 
-  const { data, error, isLoading } = useGetRecipeQuery(id.toString());
+  const { data, error, isLoading } = useGetRecipeQuery(id as string);
 
   if (!data) return;
   const recipe: Recipe = data;
@@ -135,7 +135,7 @@ const Details = () => {
       {itemsCount > 0 && (
         <View style={styles.footer}>
           <SafeAreaView edges={["bottom"]} style={{ backgroundColor: "#fff" }}>
-            <Link href="/basket" asChild>
+            <Link href="/(app)/basket" asChild>
               <TouchableOpacity style={styles.fullButton}>
                 <Text style={styles.basket}>{itemsCount}</Text>
                 <Text style={styles.footerText}>View Basket</Text>
