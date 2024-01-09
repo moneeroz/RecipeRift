@@ -1,4 +1,13 @@
-import { View, TextInput, StyleSheet, Button, Text, Image } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Button,
+  Text,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import React, { useState } from "react";
 import Colors from "@/constants/Colors";
 import { useRouter } from "expo-router";
@@ -23,7 +32,11 @@ const PasswordUpdate = () => {
   };
 
   return (
-    <>
+    <KeyboardAvoidingView
+      behavior="padding"
+      keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+      style={{ flex: 1 }}
+    >
       <View style={styles.bgContainer}>
         <Image
           source={require("@/assets/data/bg.png")}
@@ -54,7 +67,7 @@ const PasswordUpdate = () => {
           color={Colors.primary}
         ></Button>
       </View>
-    </>
+    </KeyboardAvoidingView>
   );
 };
 

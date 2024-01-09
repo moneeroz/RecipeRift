@@ -6,6 +6,8 @@ import {
   Pressable,
   Text,
   Image,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import React, { useState } from "react";
 import Colors from "@/constants/Colors";
@@ -19,7 +21,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   return (
-    <>
+    <KeyboardAvoidingView
+      behavior="padding"
+      keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+      style={{ flex: 1 }}
+    >
       <View style={styles.bgContainer}>
         <Image
           source={require("@/assets/data/bg.png")}
@@ -27,6 +33,7 @@ const Login = () => {
         />
         <Text style={styles.bgTitle}>Log In</Text>
       </View>
+
       <View style={styles.container}>
         <TextInput
           value={email}
@@ -44,6 +51,7 @@ const Login = () => {
           placeholderTextColor={Colors.medium}
           style={styles.inputField}
         />
+
         <Button
           onPress={() => signIn(email, password)}
           title="Login"
@@ -55,7 +63,7 @@ const Login = () => {
           </Pressable>
         </Link>
       </View>
-    </>
+    </KeyboardAvoidingView>
   );
 };
 

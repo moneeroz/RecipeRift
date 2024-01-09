@@ -1,4 +1,13 @@
-import { View, TextInput, StyleSheet, Button, Image, Text } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Button,
+  Image,
+  Text,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import React, { useState } from "react";
 import Colors from "@/constants/Colors";
 import { useRegisterMutation } from "@/store/api";
@@ -21,7 +30,11 @@ const Register = () => {
   };
 
   return (
-    <>
+    <KeyboardAvoidingView
+      behavior="padding"
+      style={{ flex: 1 }}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+    >
       <View style={styles.bgContainer}>
         <Image
           source={require("@/assets/data/bg.png")}
@@ -60,7 +73,7 @@ const Register = () => {
           color={Colors.primary}
         ></Button>
       </View>
-    </>
+    </KeyboardAvoidingView>
   );
 };
 
