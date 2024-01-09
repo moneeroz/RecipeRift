@@ -3,6 +3,7 @@ import { apiSlice } from "./api";
 import basketReducer from "./basket";
 import shoppingListReducer from "./shoppingList";
 import authReducer from "./auth";
+import favouritesReducer from "./favourites";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
     basket: basketReducer,
     shoppingList: shoppingListReducer,
     auth: authReducer,
+    favourites: favouritesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
