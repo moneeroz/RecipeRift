@@ -1,13 +1,10 @@
-import { View, TextInput, StyleSheet, Button } from "react-native";
+import { View, TextInput, StyleSheet, Button, Image, Text } from "react-native";
 import React, { useState } from "react";
 import Colors from "@/constants/Colors";
-import { useLogInMutation, useRegisterMutation } from "@/store/api";
-import { useDispatch } from "react-redux";
-import { setCredentials } from "@/store/auth";
+import { useRegisterMutation } from "@/store/api";
 
 const Register = () => {
   const [register, { data, error, isLoading }] = useRegisterMutation();
-  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -21,37 +18,46 @@ const Register = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        value={username}
-        onChangeText={setUsername}
-        autoCapitalize="none"
-        placeholder="Username"
-        placeholderTextColor={Colors.medium}
-        style={styles.inputField}
-      />
-      <TextInput
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        placeholder="Email"
-        placeholderTextColor={Colors.medium}
-        style={styles.inputField}
-      />
-      <TextInput
-        value={password}
-        onChangeText={setPassword}
-        placeholder="Password"
-        secureTextEntry
-        placeholderTextColor={Colors.medium}
-        style={styles.inputField}
-      />
-      <Button
-        onPress={onRegister}
-        title="Create Account"
-        color={Colors.primary}
-      ></Button>
-    </View>
+    <>
+      <View style={styles.bgContainer}>
+        <Image
+          source={require("@/assets/data/bg.png")}
+          style={{ position: "absolute" }}
+        />
+        <Text style={styles.bgTitle}>Create Account</Text>
+      </View>
+      <View style={styles.container}>
+        <TextInput
+          value={username}
+          onChangeText={setUsername}
+          autoCapitalize="none"
+          placeholder="Username"
+          placeholderTextColor={Colors.medium}
+          style={styles.inputField}
+        />
+        <TextInput
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          placeholder="Email"
+          placeholderTextColor={Colors.medium}
+          style={styles.inputField}
+        />
+        <TextInput
+          value={password}
+          onChangeText={setPassword}
+          placeholder="Password"
+          secureTextEntry
+          placeholderTextColor={Colors.medium}
+          style={styles.inputField}
+        />
+        <Button
+          onPress={onRegister}
+          title="Create Account"
+          color={Colors.primary}
+        ></Button>
+      </View>
+    </>
   );
 };
 
@@ -73,6 +79,19 @@ const styles = StyleSheet.create({
   button: {
     margin: 8,
     alignItems: "center",
+  },
+  bgContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    maxHeight: 100,
+    marginBottom: 100,
+  },
+  bgTitle: {
+    fontSize: 36,
+    fontWeight: "bold",
+    top: 100,
+    color: "#fff",
   },
 });
 

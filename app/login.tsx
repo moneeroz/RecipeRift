@@ -5,10 +5,10 @@ import {
   Button,
   Pressable,
   Text,
+  Image,
 } from "react-native";
 import React, { useState } from "react";
 import Colors from "@/constants/Colors";
-
 import { Link } from "expo-router";
 import { useSession } from "@/context/ctx";
 
@@ -19,35 +19,43 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        placeholder="Email"
-        placeholderTextColor={Colors.medium}
-        style={styles.inputField}
-      />
-      <TextInput
-        value={password}
-        onChangeText={setPassword}
-        placeholder="Password"
-        secureTextEntry
-        placeholderTextColor={Colors.medium}
-        style={styles.inputField}
-      />
-      <Button
-        onPress={() => signIn(email, password)}
-        title="Login"
-        color={Colors.primary}
-      ></Button>
-
-      <Link href="/register" asChild>
-        <Pressable style={styles.button}>
-          <Text>Create Account</Text>
-        </Pressable>
-      </Link>
-    </View>
+    <>
+      <View style={styles.bgContainer}>
+        <Image
+          source={require("@/assets/data/bg.png")}
+          style={{ position: "absolute" }}
+        />
+        <Text style={styles.bgTitle}>Log In</Text>
+      </View>
+      <View style={styles.container}>
+        <TextInput
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          placeholder="Email"
+          placeholderTextColor={Colors.medium}
+          style={styles.inputField}
+        />
+        <TextInput
+          value={password}
+          onChangeText={setPassword}
+          placeholder="Password"
+          secureTextEntry
+          placeholderTextColor={Colors.medium}
+          style={styles.inputField}
+        />
+        <Button
+          onPress={() => signIn(email, password)}
+          title="Login"
+          color={Colors.primary}
+        ></Button>
+        <Link href="/register" asChild>
+          <Pressable style={styles.button}>
+            <Text>Create Account</Text>
+          </Pressable>
+        </Link>
+      </View>
+    </>
   );
 };
 
@@ -57,6 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
   },
+
   inputField: {
     marginVertical: 4,
     height: 50,
@@ -69,6 +78,19 @@ const styles = StyleSheet.create({
   button: {
     margin: 8,
     alignItems: "center",
+  },
+  bgContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    maxHeight: 100,
+    marginBottom: 100,
+  },
+  bgTitle: {
+    fontSize: 36,
+    fontWeight: "bold",
+    top: 100,
+    color: "#fff",
   },
 });
 
