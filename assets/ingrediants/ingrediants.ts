@@ -112,6 +112,10 @@ export const ingrediants = [
     img: require("@/assets/ingrediants/mexicanseasoning.png"),
   },
   {
+    name: "mini cucumber",
+    img: require("@/assets/ingrediants/minicucumber.png"),
+  },
+  {
     name: "miso broth concentrate",
     img: require("@/assets/ingrediants/misobrothconcentrate.png"),
   },
