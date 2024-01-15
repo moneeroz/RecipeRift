@@ -40,15 +40,14 @@ const Details = () => {
 
   const { data, error, isLoading } = useGetRecipeQuery(id as string);
 
+  if (isLoading) return <Text>Loading...</Text>;
+
   if (!data) return;
   const recipe: Recipe = data;
 
-  const ingrediants: Ingredient[] = recipe.ingredients.map((item) => {
+  const ingrediants: Ingredient[] = recipe.recipeIngredients.map((item) => {
     return {
-      name: item.name,
-      extra: item.extra,
-      quantity: item.recipeIngredient.quantity,
-      unit: item.recipeIngredient.unit,
+      ...item,
       img: getIngrediantImage(item.name),
     };
   });

@@ -9,7 +9,7 @@ export default interface Recipe {
   difficulty: string;
   image: string;
   cloudinary_id: string;
-  ingredients: Ingredient[];
+  recipeIngredients: Ingredient[];
   directions: string;
   category_id: string;
 }

@@ -41,12 +41,12 @@ const Basket = () => {
 
   const onDelete = (recipe: Item) => {
     dispatch(removeRecipeFromBasket(recipe.data));
-    recipe.data.ingredients.forEach((i) => {
+    recipe.data.recipeIngredients.forEach((i) => {
       const ingredient = {
         id: i.id,
         name: i.name,
-        quantity: Number(i.recipeIngredient.quantity),
-        unit: i.recipeIngredient.unit,
+        quantity: Number(i.quantity),
+        unit: i.unit,
         img: getIngrediantImage(i.name),
       };
       dispatch(removeIngredientFromShoppingList(ingredient));
@@ -57,14 +57,13 @@ const Basket = () => {
     dispatch(clearShoppingList());
 
     recipes.forEach((recipe) => {
-      recipe.data.ingredients.forEach((ingredient) => {
+      recipe.data.recipeIngredients.forEach((ingredient) => {
         dispatch(
           addIngredientToShoppingList({
             id: ingredient.id,
             name: ingredient.name,
-            quantity:
-              Number(ingredient.recipeIngredient.quantity) * recipe.quantity,
-            unit: ingredient.recipeIngredient.unit,
+            quantity: Number(ingredient.quantity) * recipe.quantity,
+            unit: ingredient.unit,
             img: getIngrediantImage(ingredient.name),
           }),
         );

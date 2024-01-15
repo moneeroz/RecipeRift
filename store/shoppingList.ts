@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ImageSourcePropType } from "react-native";
 
 interface Ingredient {
-  id: string;
+  id: number;
   name: string;
   quantity: number;
   unit: string;
