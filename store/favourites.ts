@@ -31,13 +31,20 @@ const favouritesSlice = createSlice({
         );
       }
     },
+    updateFavs: (
+      state,
+      { payload }: PayloadAction<{ favourites: Recipe[] }>,
+    ) => {
+      state.favourites = payload.favourites;
+    },
     clearFavs: (state) => {
       state.favourites = [];
     },
   },
 });
 
-export const { addToFavs, removeFromFavs, clearFavs } = favouritesSlice.actions;
+export const { addToFavs, removeFromFavs, updateFavs, clearFavs } =
+  favouritesSlice.actions;
 
 export const selectFavourites = (state: RootState) =>
   state.favourites.favourites;
