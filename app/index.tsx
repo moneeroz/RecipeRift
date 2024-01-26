@@ -13,6 +13,7 @@ import Header from "@/components/Header";
 import { store } from "@/store/store";
 import { useDispatch } from "react-redux";
 import { addToFavs } from "@/store/favourites";
+import CardLoader from "@/components/CardLoader";
 
 const Page = () => {
   const { data, error, isLoading } = useGetRecipesQuery();
@@ -66,9 +67,10 @@ const Page = () => {
             <RecipeList height={50} recipes={filteredRecipes} />
           ) : null}
           <Text style={styles.containerTitle}>Trending today</Text>
-          <Recipes data={trending} />
+          {isLoading ? <CardLoader /> : <Recipes data={trending} />}
+
           <Text style={styles.containerTitle}>Top picks for you</Text>
-          <Recipes data={topPicks} />
+          {isLoading ? <CardLoader /> : <Recipes data={topPicks} />}
         </ScrollView>
       </SafeAreaView>
     </>

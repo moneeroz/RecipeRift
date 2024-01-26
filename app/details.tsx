@@ -19,6 +19,7 @@ import { RootState } from "@/store/store";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Recipe from "@/types/recipe";
+import DetailsLoader from "@/components/DetailsLoader";
 
 interface Ingredient {
   name: string;
@@ -40,7 +41,7 @@ const Details = () => {
 
   const { data, error, isLoading } = useGetRecipeQuery(id as string);
 
-  if (isLoading) return <Text>Loading...</Text>;
+  if (isLoading) return <DetailsLoader />;
 
   if (!data) return;
   const recipe: Recipe = data;
