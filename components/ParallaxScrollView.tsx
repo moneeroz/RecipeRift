@@ -20,7 +20,6 @@ import { addRecipeToBasket } from "@/store/basket";
 import { useDispatch } from "react-redux";
 import {
   useAddToFavouritesMutation,
-  useGetFavouritesQuery,
   useRemoveFromFavouritesMutation,
 } from "@/store/api";
 import { selectCurrentUser } from "@/store/auth";
@@ -123,6 +122,7 @@ const ParallaxScrollView = ({ recipe, children }: Props) => {
     <View>
       <Stack.Screen
         options={{
+          headerShown: true,
           headerTransparent: true,
           headerTitle: () => (
             <Animated.View style={[headerAnimatedStyle]}>

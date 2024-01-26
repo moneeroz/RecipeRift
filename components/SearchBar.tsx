@@ -16,7 +16,7 @@ const SearchBar = ({ onSearchTermChange }: Props) => {
           <View style={styles.searchField}>
             <Ionicons
               style={styles.searchIcon}
-              name="ios-search"
+              name="search"
               size={20}
               color={Colors.medium}
             />

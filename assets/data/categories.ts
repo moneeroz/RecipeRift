@@ -10,11 +10,6 @@ export const categories = [
     img: require("@/assets/data/chicken.png"),
   },
   {
-    id: "halal",
-    text: "Halal",
-    img: require("@/assets/data/halal.png"),
-  },
-  {
     id: "pork",
     text: "Pork",
     img: require("@/assets/data/pork.png"),

@@ -22,7 +22,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ConfettiCannon from "react-native-confetti-cannon";
 
 interface Ingredient {
-  id: string;
+  id: number;
   name: string;
   quantity: number;
   unit: string;
@@ -82,7 +82,7 @@ const ShoppingList = () => {
       <View>
         <FlatList
           data={ingredients}
-          keyExtractor={(item) => item.data.id}
+          keyExtractor={(item) => item.data.id.toString()}
           contentContainerStyle={{
             paddingBottom: 20,
             backgroundColor: "#fff",
@@ -101,14 +101,14 @@ const ShoppingList = () => {
               key={item.data.id}
               onDelete={() => onDelete(item.data)}
             >
-              <TouchableOpacity key={item.data.id} style={styles.item}>
+              <View key={item.data.id} style={styles.item}>
                 <View style={{ flex: 1, justifyContent: "center" }}>
                   <Text style={styles.Ingredient}>
                     {item.data.quantity} {item.data.unit} {item.data.name}
                   </Text>
                 </View>
                 <Image source={item.data.img} style={styles.IngredientImage} />
-              </TouchableOpacity>
+              </View>
             </SwipeableRow>
           )}
         />

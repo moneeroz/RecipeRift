@@ -52,18 +52,22 @@ export function SessionProvider(props: React.PropsWithChildren) {
       const token = await SecureStore.getItemAsync("token");
 
       if (token) {
-        const decoded = JWT.decode<any>(token, key!);
-        dispatch(
-          setCredentials({
-            token: token,
-            user: {
-              id: decoded.id,
-              email: decoded.email,
-              username: decoded.username,
-            },
-          }),
-        );
-        setSession("xxx");
+        try {
+          const decoded = JWT.decode<any>(token, key!);
+          dispatch(
+            setCredentials({
+              token: token,
+              user: {
+                id: decoded.id,
+                email: decoded.email,
+                username: decoded.username,
+              },
+            }),
+          );
+          setSession("xxx");
+        } catch (error) {
+          console.log("expired token");
+        }
       }
     };
     loadToken();
