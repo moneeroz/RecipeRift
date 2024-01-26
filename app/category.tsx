@@ -6,6 +6,7 @@ import Colors from "@/constants/Colors";
 import RecipeList from "@/components/RecipeList";
 import { useGetRecipesByCategoryQuery } from "@/store/api";
 import Recipe from "@/types/recipe";
+import CardListLoader from "@/components/CardListLoader";
 
 const Category = () => {
   const { id } = useLocalSearchParams();
@@ -22,6 +23,7 @@ const Category = () => {
     <View>
       <Stack.Screen
         options={{
+          headerShown: true,
           headerTitle: () => (
             <View>
               <Text style={styles.headerText}>{id}</Text>
@@ -39,7 +41,8 @@ const Category = () => {
           ),
         }}
       />
-      <RecipeList recipes={recipes} height={100} />
+      {isLoading && <CardListLoader />}
+      <RecipeList recipes={recipes} />
     </View>
   );
 };

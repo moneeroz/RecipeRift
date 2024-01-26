@@ -27,6 +27,7 @@ export default function RootLayoutNav() {
               <Stack.Screen name="(app)" options={{ headerShown: false }} />
               <Stack.Screen name="index" />
               <Stack.Screen name="details" options={{ headerShown: false }} />
+              <Stack.Screen name="category" options={{ headerShown: false }} />
               <Stack.Screen
                 name="login"
                 options={{
