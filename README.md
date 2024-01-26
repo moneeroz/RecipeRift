@@ -13,7 +13,7 @@ This project was developed by [Me](https://github.com/Moneeroz)
 
 ## Getting Started
 
-clone the backend repo from [Here](https://github.com/moneeroz/rn-recipes-nitro-server) and follow its ReadMe to get it running!
+clone the backend repo from [Here](https://github.com/moneeroz/RecipeRift-nitro-server) and follow its ReadMe to get it running!
 
 To run the following project on your machine please follow the steps below:
 
