@@ -1,12 +1,12 @@
-# React Native Recipes
+# RecipeRift
 
-React Native Recipes is mobile recipe app that allows users to explore a vast collection of recipes, create personalised shopping lists and more.
+RecipeRift is mobile recipe app that allows users to explore a vast collection of recipes, create personalised shopping lists and more.
 
 Front-end Stack: React Native, Redux Tool Kit, Expo
 
 Back-end Stack: Node.js, Express, PostgresDB, Sequelize
 
-With React Native Recipes, you can effortlessly find new recipes, save your favourites, and plan your meals like a pro. The shopping list feature makes grocery shopping a breeze, ensuring you never miss an ingredient again!
+With RecipeRift, you can effortlessly find new recipes, save your favourites, and plan your meals like a pro. The shopping list feature makes grocery shopping a breeze, ensuring you never miss an ingredient again!
 
 This project was developed by [Me](https://github.com/Moneeroz)
 <br>
