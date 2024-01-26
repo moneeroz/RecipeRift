@@ -4,7 +4,6 @@ import { Dimensions } from "react-native";
 
 const DetailsLoader = () => {
   const { width, height } = Dimensions.get("window");
-  // const viewBox = `0 0 ${width} ${height}`;
 
   return (
     <ContentLoader
