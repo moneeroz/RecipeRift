@@ -31,13 +31,26 @@ const basketSlice = createSlice({
         }
       }
     },
+    updateBasket: (
+      state,
+      { payload }: PayloadAction<{ recipes: Recipe[] }>,
+    ) => {
+      state.items = {};
+      payload.recipes.forEach((recipe) => {
+        state.items[recipe.id] = { data: recipe, quantity: recipe.count! };
+      });
+    },
     clearBasket: (state) => {
       state.items = {};
     },
   },
 });
 
-export const { addRecipeToBasket, removeRecipeFromBasket, clearBasket } =
-  basketSlice.actions;
+export const {
+  addRecipeToBasket,
+  removeRecipeFromBasket,
+  updateBasket,
+  clearBasket,
+} = basketSlice.actions;
 
 export default basketSlice.reducer;

@@ -5,6 +5,7 @@ import {
   LoginResponse,
   FavouritePayload,
   passwordResetPayload,
+  BasketPayload,
 } from "@/types/auth";
 import Recipe from "@/types/recipe";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
@@ -48,6 +49,33 @@ export const apiSlice = createApi({
         method: "DELETE",
       }),
     }),
+    getBasketItems: builder.query<Recipe[], string | undefined>({
+      query: (user_id) => `cart/${user_id}`,
+    }),
+    addToBasket: builder.mutation<Recipe, BasketPayload>({
+      query: ({ recipe_id, user_id }) => ({
+        url: `cart/${user_id}/${recipe_id}`,
+        method: "POST",
+      }),
+    }),
+    updateItem: builder.mutation<Recipe, BasketPayload>({
+      query: ({ recipe_id, user_id }) => ({
+        url: `cart/${user_id}/${recipe_id}`,
+        method: "PUT",
+      }),
+    }),
+    removeFromBasket: builder.mutation<string, BasketPayload>({
+      query: ({ recipe_id, user_id }) => ({
+        url: `cart/${user_id}/${recipe_id}`,
+        method: "DELETE",
+      }),
+    }),
+    clearBasketItems: builder.mutation<string, string | undefined>({
+      query: (user_id) => ({
+        url: `cart/${user_id}`,
+        method: "DELETE",
+      }),
+    }),
     logIn: builder.mutation<LoginResponse, User>({
       query: (credentials) => ({
         url: "auth/login",
@@ -86,4 +114,9 @@ export const {
   useAddToFavouritesMutation,
   useRemoveFromFavouritesMutation,
   useUpdatePasswordMutation,
+  useGetBasketItemsQuery,
+  useAddToBasketMutation,
+  useUpdateItemMutation,
+  useRemoveFromBasketMutation,
+  useClearBasketItemsMutation,
 } = apiSlice;

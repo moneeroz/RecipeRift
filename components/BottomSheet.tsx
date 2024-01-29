@@ -7,7 +7,7 @@ import {
 } from "@gorhom/bottom-sheet";
 import Colors from "../constants/Colors";
 import { Link } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSession } from "@/context/ctx";
 import { selectCurrentUser } from "@/store/auth";
 import { store } from "@/store/store";
@@ -15,7 +15,7 @@ import { store } from "@/store/store";
 export type Ref = BottomSheetModal;
 
 const BottomSheet = forwardRef<Ref>((props, ref) => {
-  const snapPoints = useMemo(() => ["40%"], []);
+  const snapPoints = useMemo(() => ["45%"], []);
   const renderBackDrop = useCallback(
     (props: any) => (
       <BottomSheetBackdrop
@@ -57,6 +57,23 @@ const BottomSheet = forwardRef<Ref>((props, ref) => {
                     color={Colors.medium}
                   />
                   <Text style={{ flex: 1 }}>Favourites</Text>
+                  <Ionicons
+                    name="chevron-forward-outline"
+                    size={20}
+                    color={Colors.primary}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Link>
+            <Link href={"/(app)/basket"} asChild>
+              <TouchableOpacity onPress={() => dismiss()}>
+                <View style={styles.item}>
+                  <MaterialCommunityIcons
+                    name="basket-outline"
+                    size={20}
+                    color={Colors.medium}
+                  />
+                  <Text style={{ flex: 1 }}>Basket</Text>
                   <Ionicons
                     name="chevron-forward-outline"
                     size={20}

@@ -19,6 +19,7 @@ import Recipe from "@/types/recipe";
 import { addRecipeToBasket } from "@/store/basket";
 import { useDispatch } from "react-redux";
 import {
+  useAddToBasketMutation,
   useAddToFavouritesMutation,
   useRemoveFromFavouritesMutation,
 } from "@/store/api";
@@ -29,6 +30,7 @@ import {
   removeFromFavs,
   selectFavourites,
 } from "@/store/favourites";
+import { hapticFeedback } from "@/utils/haptics";
 
 interface Props {
   children?: ReactNode;
@@ -46,11 +48,11 @@ const ParallaxScrollView = ({ recipe, children }: Props) => {
 
   const [addToFavourites] = useAddToFavouritesMutation();
   const [removeFromFavourites] = useRemoveFromFavouritesMutation();
+  const [addToBasket] = useAddToBasketMutation();
   const dispatch = useDispatch();
   const user = selectCurrentUser(store.getState());
   const favourites = selectFavourites(store.getState());
   const isFavourite = favourites?.some((fav) => fav.id === recipe.id);
-  console.log(isFavourite);
 
   const handleFavPress = () => {
     if (!user) {
@@ -64,6 +66,8 @@ const ParallaxScrollView = ({ recipe, children }: Props) => {
       addToFavourites({ recipe_id: recipe.id, user_id: user.id });
       dispatch(addToFavs({ recipe: recipe }));
     }
+
+    hapticFeedback();
   };
 
   const renderButtons = () => (
@@ -80,6 +84,8 @@ const ParallaxScrollView = ({ recipe, children }: Props) => {
       <TouchableOpacity
         onPress={() => {
           dispatch(addRecipeToBasket(recipe));
+          addToBasket({ recipe_id: recipe.id, user_id: user?.id });
+          hapticFeedback();
         }}
       >
         <MaterialCommunityIcons

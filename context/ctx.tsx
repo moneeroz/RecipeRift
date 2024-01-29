@@ -48,8 +48,8 @@ export function SessionProvider(props: React.PropsWithChildren) {
   const user = selectCurrentUser(store.getState());
 
   useEffect(() => {
-    const loadToken = async () => {
-      const token = await SecureStore.getItemAsync("token");
+    const loadToken = () => {
+      const token = SecureStore.getItem("token");
 
       if (token) {
         try {
@@ -64,9 +64,9 @@ export function SessionProvider(props: React.PropsWithChildren) {
               },
             }),
           );
-          setSession("xxx");
+          setSession(decoded.id);
         } catch (error) {
-          console.log("expired token");
+          setSession(null);
         }
       }
     };
@@ -95,7 +95,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
           } catch (error) {
             console.log(error);
           }
-          setSession("xxx");
+          if (user) setSession(user?.id!);
         },
         signOut: () => {
           dispatch(clearCredentials());

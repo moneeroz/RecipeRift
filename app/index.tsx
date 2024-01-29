@@ -7,13 +7,18 @@ import Recipes from "@/components/Recipes";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 import SearchBar from "@/components/SearchBar";
-import { useGetFavouritesQuery, useGetRecipesQuery } from "@/store/api";
+import {
+  useGetBasketItemsQuery,
+  useGetFavouritesQuery,
+  useGetRecipesQuery,
+} from "@/store/api";
 import RecipeList from "@/components/RecipeList";
 import Header from "@/components/Header";
 import { store } from "@/store/store";
 import { useDispatch } from "react-redux";
-import { addToFavs } from "@/store/favourites";
+import { updateFavs } from "@/store/favourites";
 import CardLoader from "@/components/CardLoader";
+import { updateBasket } from "@/store/basket";
 
 const Page = () => {
   const { data, error, isLoading } = useGetRecipesQuery();
@@ -36,14 +41,15 @@ const Page = () => {
 
   const user = store.getState().auth.user;
   const { data: favourites } = useGetFavouritesQuery(user?.id);
+  const { data: basketItems } = useGetBasketItemsQuery(user?.id);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (user) {
-      if (favourites)
-        favourites.forEach((recipe) => dispatch(addToFavs({ recipe })));
+      if (favourites) dispatch(updateFavs({ favourites: favourites }));
+      if (basketItems) dispatch(updateBasket({ recipes: basketItems }));
     }
-  }, [favourites]);
+  }, [favourites, basketItems]);
 
   const handleSearchTermChange = (newSearchTerm: string) => {
     setSearchTerm(newSearchTerm);

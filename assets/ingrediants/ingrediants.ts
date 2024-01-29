@@ -1,7 +1,9 @@
 export const getIngrediantImage = (name: string) => {
-  const ingrediant = ingrediants.find(
-    (i) => name.toLocaleLowerCase() == i.name,
-  );
+  if (!name) {
+    return null;
+  }
+
+  const ingrediant = ingrediants.find((i) => name.toLowerCase() == i.name);
   return ingrediant ? ingrediant.img : null;
 };
 

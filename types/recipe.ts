@@ -12,4 +12,5 @@ export default interface Recipe {
   recipeIngredients: Ingredient[];
   directions: string;
   category_id: string;
+  count?: number;
 }

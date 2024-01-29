@@ -20,6 +20,7 @@ import {
 import { clearBasket } from "@/store/basket";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ConfettiCannon from "react-native-confetti-cannon";
+import { hapticFeedback } from "@/utils/haptics";
 
 interface Ingredient {
   id: number;
@@ -57,6 +58,7 @@ const ShoppingList = () => {
               <TouchableOpacity
                 onPress={() => {
                   dispatch(clearShoppingList());
+                  hapticFeedback();
                 }}
               >
                 <MaterialCommunityIcons

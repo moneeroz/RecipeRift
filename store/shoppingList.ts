@@ -45,7 +45,7 @@ const shoppingListSlice = createSlice({
       ) {
         state.items[id].data.quantity -= action.payload.quantity;
       }
-      if (state.items[id].data.quantity === 0) {
+      if (state.items[id] == undefined || state.items[id].data.quantity <= 0) {
         delete state.items[id];
       }
     },

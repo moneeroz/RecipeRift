@@ -5,15 +5,20 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearBasket, removeRecipeFromBasket } from "@/store/basket";
+import {
+  clearBasket,
+  removeRecipeFromBasket,
+  updateBasket,
+} from "@/store/basket";
 import Colors from "@/constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, Stack } from "expo-router";
 import SwipeableRow from "@/components/SwipeableRow";
 import { RootState } from "@/store/store";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Animated, { FadeInLeft } from "react-native-reanimated";
 import {
   addIngredientToShoppingList,
   clearShoppingList,
@@ -21,6 +26,11 @@ import {
 } from "@/store/shoppingList";
 import { getIngrediantImage } from "@/assets/ingrediants/ingrediants";
 import Recipe from "@/types/recipe";
+import { hapticFeedback } from "@/utils/haptics";
+import {
+  useUpdateItemMutation,
+  useClearBasketItemsMutation,
+} from "@/store/api";
 
 interface Item {
   data: Recipe;
@@ -29,7 +39,10 @@ interface Item {
 
 const Basket = () => {
   const basketItems = useSelector((state: RootState) => state.basket.items);
+  const user = useSelector((state: RootState) => state.auth.user);
   const recipes = Object.values(basketItems).map((item) => item);
+  const [updateItem] = useUpdateItemMutation();
+  const [clearBasketItems] = useClearBasketItemsMutation();
   const dispatch = useDispatch();
 
   const itemsCount = useSelector((state: RootState) =>
@@ -41,6 +54,7 @@ const Basket = () => {
 
   const onDelete = (recipe: Item) => {
     dispatch(removeRecipeFromBasket(recipe.data));
+    updateItem({ recipe_id: recipe.data.id, user_id: user?.id });
     recipe.data.recipeIngredients.forEach((i) => {
       const ingredient = {
         id: i.id,
@@ -79,6 +93,8 @@ const Basket = () => {
             <TouchableOpacity
               onPress={() => {
                 dispatch(clearBasket());
+                clearBasketItems(user?.id);
+                hapticFeedback();
               }}
             >
               <MaterialCommunityIcons
@@ -91,7 +107,8 @@ const Basket = () => {
         }}
       />
 
-      <FlatList
+      <Animated.FlatList
+        entering={FadeInLeft.duration(800).delay(200)}
         data={Object.values(basketItems)}
         ListHeaderComponent={
           <Text style={styles.section}>
@@ -113,7 +130,8 @@ const Basket = () => {
         )}
         ListFooterComponent={
           itemsCount ? null : (
-            <View
+            <Animated.View
+              entering={FadeInLeft.duration(800).delay(200)}
               style={{ marginTop: "50%", padding: 20, alignItems: "center" }}
             >
               <Text
@@ -130,7 +148,7 @@ const Basket = () => {
                   <Text style={styles.footerText}>Add Recipes</Text>
                 </TouchableOpacity>
               </Link>
-            </View>
+            </Animated.View>
           )
         }
       />

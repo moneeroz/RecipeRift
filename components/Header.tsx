@@ -7,11 +7,13 @@ import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import BottomSheet from "./BottomSheet";
+import { hapticFeedback } from "@/utils/haptics";
 
 const Header = () => {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const openModal = () => {
     bottomSheetRef.current?.present();
+    hapticFeedback();
   };
   return (
     <SafeAreaView style={styles.safeArea}>
