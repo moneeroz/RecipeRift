@@ -20,8 +20,8 @@ export const categories = [
     img: require("@/assets/data/seafood.png"),
   },
   {
-    id: "vegeterian",
-    text: "Vegeterian",
+    id: "vegetarian",
+    text: "Vegetarian",
     img: require("@/assets/data/vegetarian.png"),
   },
 ];
