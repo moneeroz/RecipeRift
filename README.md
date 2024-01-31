@@ -46,7 +46,7 @@ npx expo
 [<img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1704779387/rn-recipes-demo/tlmjmehho8hmdpowqqom.png" width="50%">](https://res.cloudinary.com/dsity4tvx/video/upload/v1704783695/rn-recipes-demo/ukk9fdkuywbymnkivxsq.mov "Video Demo")
 
 <div align="center">
-    <img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1706666537/uw56whd8n3zwrkcgdvwn.gif" alt="Animations" width="50%"  style="padding: 20px"/>
+    <img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1706667768/rn-recipes-demo/qj2vabhfjwlgytax3au0.gif" alt="Animations" width="50%"  style="padding: 20px"/>
     <img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1704779386/rn-recipes-demo/wx121vvyl4jkbixh9q8y.png" alt="Auth Page" width="50%"  style="padding: 20px"/>
     <img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1704779387/rn-recipes-demo/tlmjmehho8hmdpowqqom.png" alt="Home Page" width="50%"  style="padding: 20px"/>
     <img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1704779387/rn-recipes-demo/smlfqmmcth0zxcxdtl4c.png" alt="Recipe page" width="50%"  style="padding: 20px"/>
