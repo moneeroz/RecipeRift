@@ -46,11 +46,18 @@ npx expo
 [<img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1704779387/rn-recipes-demo/tlmjmehho8hmdpowqqom.png" width="50%">](https://res.cloudinary.com/dsity4tvx/video/upload/v1704783695/rn-recipes-demo/ukk9fdkuywbymnkivxsq.mov "Video Demo")
 
 <div align="center">
-    <img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1706667929/kqy8rvul37bp5wmw9dle.gif" alt="Animations" width="50%"  style="padding: 20px"/>
+    <p>Loading & Animations:</p>
+    <img src="https://github.com/moneeroz/RecipeRift/blob/main/zbpjtaym2btfdkauopkl(2).gif" alt="Animations" width="50%"  style="padding: 20px"/>
+    <p>Login:</p>
     <img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1704779386/rn-recipes-demo/wx121vvyl4jkbixh9q8y.png" alt="Auth Page" width="50%"  style="padding: 20px"/>
+    <p>Home:</p>
     <img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1704779387/rn-recipes-demo/tlmjmehho8hmdpowqqom.png" alt="Home Page" width="50%"  style="padding: 20px"/>
+    <p>Recipe Details:</p>
     <img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1704779387/rn-recipes-demo/smlfqmmcth0zxcxdtl4c.png" alt="Recipe page" width="50%"  style="padding: 20px"/>
+    <p>Basket:</p>
     <img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1704779387/rn-recipes-demo/xuvntgl3zp60hgbcdzpf.png" alt="basket" width="50%"  style="padding: 20px"/>
+    <p>Grocery List:</p>
     <img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1704779387/rn-recipes-demo/w2o50b0glrwmwp6tbvel.png" alt="shopping list" width="50%"  style="padding: 20px"/>
+    <p>Bottom Sheet:</p>
     <img src="https://res.cloudinary.com/dsity4tvx/image/upload/v1704780594/rn-recipes-demo/czikjrwtfwqjyidsruuj.png" alt="bottom sheet" width="50%"  style="padding: 20px"/>
 </div>
