@@ -1,5 +1,5 @@
 import Colors from "@/constants/Colors";
-import { SessionProvider } from "@/context/ctx";
+import { AuthProvider } from "@/context/AuthContext";
 import { store } from "@/store/store";
 import { Ionicons } from "@expo/vector-icons";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
@@ -20,12 +20,12 @@ export default function RootLayoutNav() {
 
   return (
     <Provider store={store}>
-      <SessionProvider>
+      <AuthProvider>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <BottomSheetModalProvider>
             <Stack>
-              <Stack.Screen name="(app)" options={{ headerShown: false }} />
               <Stack.Screen name="index" />
+              <Stack.Screen name="(app)" options={{ headerShown: false }} />
               <Stack.Screen name="details" options={{ headerShown: false }} />
               <Stack.Screen name="category" options={{ headerShown: false }} />
               <Stack.Screen
@@ -112,7 +112,7 @@ export default function RootLayoutNav() {
             </Stack>
           </BottomSheetModalProvider>
         </GestureHandlerRootView>
-      </SessionProvider>
+      </AuthProvider>
     </Provider>
   );
 }

@@ -8,7 +8,7 @@ import {
 import Colors from "../constants/Colors";
 import { Link } from "expo-router";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { useSession } from "@/context/ctx";
+import { useAuth } from "@/context/AuthContext";
 import { selectCurrentUser } from "@/store/auth";
 import { store } from "@/store/store";
 
@@ -27,7 +27,9 @@ const BottomSheet = forwardRef<Ref>((props, ref) => {
     [],
   );
   const { dismiss } = useBottomSheetModal();
-  const { signOut, session } = useSession();
+
+  const { signOut, authState } = useAuth();
+  const { authenticated } = authState;
   const user = selectCurrentUser(store.getState());
 
   const logOut = () => {
@@ -45,7 +47,7 @@ const BottomSheet = forwardRef<Ref>((props, ref) => {
       handleIndicatorStyle={{ display: "none" }}
     >
       <View style={styles.contentContainer}>
-        {session ? (
+        {authenticated ? (
           <>
             <Text style={styles.subheader}>{user?.username}'s Kitchen</Text>
             <Link href={"/(app)/favourites"} asChild>
