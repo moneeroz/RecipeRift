@@ -12,10 +12,10 @@ import {
 import React, { useState } from "react";
 import Colors from "@/constants/Colors";
 import { Link } from "expo-router";
-import { useSession } from "@/context/ctx";
+import { useAuth } from "@/context/AuthContext";
 
 const Login = () => {
-  const { signIn } = useSession();
+  const { signIn } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
